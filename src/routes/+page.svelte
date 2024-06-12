@@ -8,6 +8,7 @@
 	import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 	import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
 	import { tailwindClasses } from '$lib/index';
+	import { enhance } from '$app/forms';
 
 	// Stores to manage editor content and placeholders
 	const editorContent = writable('');
@@ -18,8 +19,8 @@
 	let Monaco: any;
 
 	const initialEditorValue = `
-    <div class="flex text-3xl h-[400px] bg-zinc-900 p-12">
-        <div class="w-[800px] p-8 flex flex-col justify-center items-center text-center border-8 rounded-[50px] border-rose-600 text-white background">
+    <div class="text-3xl h-[400px] bg-zinc-900 p-12">
+        <div class="w-[800px] p-8  justify-center items-center text-center border-8 rounded-[50px] border-rose-600 text-white">
             <p class="font-bold" style="font-size: 80px">{title}</p>
             <p class="mt-4">{description}</p>
         </div>
@@ -134,14 +135,18 @@
 				srcdoc={$previewHTML}
 				title="preview"
 			></iframe>
-			<div class="  flex space-x-2">
-				<button
-					class=" p-2 text-sm font-semibold uppercase text-gray-500 hover:text-gray-800 hover:underline"
-					>Save</button
-				>
-				<button
-					class=" p-2 text-sm font-semibold uppercase text-gray-500 hover:text-gray-800 hover:underline"
-					>Get Url</button
+			<div class="  mt-4 flex space-x-2">
+				<form use:enhance={() => {}} method="POST">
+					<button
+						class=" rounded-md bg-black p-2 text-sm font-semibold uppercase text-white hover:bg-gray-800"
+						>Get Url</button
+					>
+					<input type="hidden" name="html" value={$editorContent} />
+				</form>
+			</div>
+			<div class="flex flex-col space-y-2">
+				<label for="title"
+					>Hint: If you change somthing you must get a new url to see the changes</label
 				>
 			</div>
 			<div class="flex flex-col space-y-2">

@@ -36,6 +36,10 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"monaco-editor": "^0.49.0"
+		"@resvg/resvg-js": "^2.6.2",
+		"monaco-editor": "^0.49.0",
+		"pocketbase": "^0.21.3",
+		"satori": "^0.10.13",
+		"satori-html": "^0.3.2"
 	}
 }
